@@ -1,0 +1,22 @@
+%h1 Users List
+.row
+  .col-sm-12
+    %table.table.table-hover
+      %thead
+        %tr
+          %th #
+          %th First Name
+          %th Last Name
+          %th Show Profile
+      %tbody
+        -users.each do |user|
+          %tr
+            %td
+              = user.id
+            %td
+              = user.firstname
+            %td
+              = user.lastname
+            %td
+              %a.btn.btn-default{'href' => users_profile_path(user.id)} Show Profile
+

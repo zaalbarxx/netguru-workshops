@@ -1,5 +1,9 @@
-class UserController < ApplicationController
+class UsersController < ApplicationController
   before_action :authenticate_user!
+  expose(:users)
+
+  def list
+  end
 
   def profile
     @user = current_user.id === params[:id] ? current_user : User.find(params[:id])

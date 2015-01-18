@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/user/:id/profile', to: 'user#profile', as: 'user_profile'
-
+  get '/user/:id/profile', to: 'users#profile', as: 'users_profile'
+  get '/users', to: 'users#list', as: 'users_list'
   root 'categories#index'
 end
