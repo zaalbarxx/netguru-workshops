@@ -13,6 +13,8 @@
       %ul.nav.navbar-nav.navbar-right
         %ul.nav.navbar-nav
           %li
+            =link_to 'Users', users_list_path
+          %li
             =link_to 'Categories', categories_path
           -if user_signed_in?
             %li
