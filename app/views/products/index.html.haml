@@ -18,8 +18,10 @@
       %td
         =link_to('Show', category_product_path(product.category, product), {class: 'btn btn-primary'})
       %td
-        =link_to('Edit', edit_category_product_path(product.category, product), {class: 'btn btn-default'})
+        -if user_signed_in? and product.belongs_to_user?(current_user)
+          =link_to('Edit', edit_category_product_path(product.category, product), {class: 'btn btn-default'})
       %td
-        =link_to('Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger")
+        -if user_signed_in? and product.belongs_to_user?(current_user)
+          =link_to('Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger")
 
 %br
