@@ -1,6 +1,6 @@
 %h1 Listing products
-
-%table
+=link_to 'Back to category', category_path(category), :class => 'btn btn-default'
+%table.table
   %tr
     %th Title
     %th Description
@@ -14,8 +14,11 @@
       %td= product.title
       %td= product.description
       %td= product.price
-      %td= link_to 'Show', category_product_path(product.category, product)
-      %td= link_to 'Edit', edit_category_product_path(product.category, product)
-      %td= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }
+      %td
+        =link_to('Show', category_product_path(product.category, product), {class: 'btn btn-primary'})
+      %td
+        =link_to('Edit', edit_category_product_path(product.category, product), {class: 'btn btn-default'})
+      %td
+        =link_to('Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }, class:"btn btn-danger")
 
 %br

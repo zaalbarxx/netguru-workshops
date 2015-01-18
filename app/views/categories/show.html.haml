@@ -5,13 +5,18 @@
   = category.name
 
 %p
-  - category.products.each do |product|
-    = product.title
+  -unless category.products.count == 0
+    %h3 Products
+    %ul
+      - category.products.each do |product|
+        %li
+          = link_to(product.title, category_product_path(category, product))
 
-%p
-  %h3 New product
-  = render 'products/form'
-
-= link_to 'Edit', edit_category_path(category)
-\|
-= link_to 'Back', categories_path, class: 'btn btn-primary'
+-if user_signed_in?
+  %p
+    %h3 New product
+    = render 'products/form'
+.btn-group
+  -if user_is_admin?(current_user)
+    = link_to 'Edit', edit_category_path(category), class: 'btn btn-default'
+  = link_to 'Back', categories_path, class: 'btn btn-primary'

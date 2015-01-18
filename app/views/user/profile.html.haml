@@ -1,0 +1,72 @@
+%h1 User Profile
+.row
+  .col-sm-3
+    %ul.list-group
+      %li.list-group-item.text-muted Profile
+      %li.list-group-item.text-right
+        %span.pull-left
+          %strong Joined
+        = @user.created_at
+      %li.list-group-item.text-right
+        %span.pull-left
+          %strong
+            Real Name
+        = @user.name
+    %ul.list-group
+      %li.list-group-item.text-muted Statistics
+      %li.list-group-item.text-right
+        %span.pull-left
+          %strong Products
+        = @products.length
+      %li.list-group-item.text-right
+        %span.pull-left
+          %strong Reviews
+        = @user_reviews_count
+  .col-sm-9
+    %ul.nav.nav-tabs#userProfileTabs
+      %li.active
+        %a{'href' => '#products', 'data-toggle' => 'tab'} Products
+      %li
+        %a{'href' => '#reviews', 'data-toggle' => 'tab'} Last Reviews
+    .tab-content
+      .tab-pane.active#products
+        .table-responsive
+          %table.table.table-hover
+            %thead
+              %tr
+                %th #
+                %th Title
+                %th Description
+                %th Price
+                %th Category
+            %tbody
+              -@products.each do |product|
+                %tr
+                  %td
+                    = product.id
+                  %td
+                    = link_to product.title, category_product_path(product.category_id, product)
+                  %td
+                    = product.description
+                  %td
+                    = product.price
+                  %td
+                    = product.category.name
+      .tab-pane#reviews
+        .panel-group#reviewsAccordion
+          -@reviews.each do |review|
+            .panel.panel-default
+              .panel-heading
+                %h3.panel-title
+                  %a{'data-toggle' => 'collapse', 'data-parent' => '#reviewsAccordion', 'href' => "#collapse#{review.id}"}
+                    ="Review for product #{review.product.title}"
+                    %span.text-right.pull-right
+                      Rating:
+                      =review.rating
+              .panel-collapse.collapse{'id' => "collapse#{review.id}"}
+                .panel-body
+                  =review.content
+                  %div.text-right
+                    =link_to review.product.title, category_product_url(review.product.category_id, review.product)
+                  .text-right.text-muted
+                    =review.created_at

@@ -1,7 +1,7 @@
 %h1 Editing category
 
 = render 'form'
-
-= link_to 'Show', category
-\|
-= link_to 'Back', categories_path, class: 'btn btn-primary'
+%hr
+.btn-group
+  = link_to 'Show', category, class: 'btn btn-default'
+  = link_to 'Back', categories_path, class: 'btn btn-primary'

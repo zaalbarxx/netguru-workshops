@@ -1,4 +1,13 @@
-%p= review.content
+.review
+
+.well
+  .bold
+    %em= review.author + " said (on #{review.created_at.to_s(:db)})"
+  = review.content
+  .review-stars
+    - (1..review.rating).each do |index|
+      %span{class: "glyphicon glyphicon-star"}
+  -if user_is_admin?(current_user)
+    %hr
+    = link_to 'Delete', [category, product, review], method: :delete, data: { confirm: 'Are you sure?'}, class: 'btn btn-danger'
 %p
-  %b= review.rating
-  %em= review.author

@@ -1,14 +1,12 @@
-= simple_form_for [category, product, review] do |f|
-  - if review.errors.any?
-    #error_explanation
-      %h2= "#{pluralize(review.errors.count, "error")} prohibited this review from being saved:"
-      %ul
-        - review.errors.full_messages.each do |msg|
-          %li= msg
+= simple_form_for [category, product, review], {:remote => true, :format => :json} do |f|
+  = render 'reviews/form_errors'
   .form-group
     = f.label :content
     = f.text_area :content, class: 'form-control'
-  .form-group
-    = f.input :rating, collection: 1..5, class: 'form-control'
-
-  = f.submit 'Save', class: 'btn btn-default'
+  .text-right
+    .stars.starrr{'data-rating' => 0}
+    %a#close-review-box.btn.btn-danger.btn-sm{'style' => 'display:none; margin-right: 10px;', 'href' => '#'}
+      %span.glyphicon.glyphicon-remove
+        Cancel
+    = f.input :rating, :id => 'rating-hidden', :as => :hidden
+    %input.btn.btn-success.btn-lg{'type' => 'submit', 'value' => 'Save'}

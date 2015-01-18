@@ -1,0 +1,9 @@
+.row{style: "margin-top:40px;"}
+  .col-md-3
+    .well.well-sm
+      .text-center
+        %a#open-review-box.btn.btn-success.btn-green{href: "#reviews-anchor"}
+          Leave a Review
+      #post-review-box.row{style: (!review.errors.any? ? 'display:none' : '')}
+        .col-md-12
+          = render 'reviews/form'

@@ -1,5 +1,6 @@
-%p#notice= notice
-%p#error= flash[:error]
+-if notice
+  .alert.alert-success
+    = notice
 
 %p
   %b Title:
@@ -13,13 +14,14 @@
 
 %p
   %b Category
-  = product.category.name
+  = link_to(product.category.name, category_path(product.category))
 
 %h3 Reviews
-= render 'reviews/form'
-
-= render reviews
-
-= link_to 'Edit', edit_category_product_path(category.id, product.id)
-\|
-= link_to 'Back', category_products_path, class: 'btn btn-primary'
+-if user_signed_in?
+  = render 'reviews/review_box'
+.reviews-container
+  = render reviews
+.btn-group
+  - if user_signed_in? and user_is_admin?(current_user)
+    = link_to 'Edit', edit_category_product_path(category.id, product.id), class: 'btn btn-default'
+  = link_to 'Back', category_products_path, class: 'btn btn-primary'

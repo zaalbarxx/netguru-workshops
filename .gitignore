@@ -21,7 +21,7 @@ config/database.yml
 .env
 .rvmrc
 .powrc
-
+.idea
 logfile
 
 local.local.*
